@@ -20,20 +20,9 @@ gravity = 0.5f;
 public void Update()
 {
 Accionrebotar();
-DetectarSuelo();
+DetectarPared();
 ActualizarPosicion();
-}
-
-public void ActualizarPosicion()
-{
-	positionX = (int)velocityX;
-	positionY = (int)velocityY;
-}
-
-public void DetectarSuelo()
-{
-	if(positionX+size > 800)
-	System.out.println("Detecte Suelo");
+Rebotar();
 }
 
 public void Accionrebotar(){
@@ -42,14 +31,25 @@ public void Accionrebotar(){
 
 class Accionrebotar extends Circle{ 
 	public Accionrebotar(){ 
-	if(positionX+size > 800) 
-	System.out.println("Detectar pared");
+		velocityX += gravity;
+		if(positionX+size > 800) 
+		System.out.println("Detectar suelo");
+	}
 }
+public void Rebotar(){
+	velocityX -= gravity;
 }
 
-public void AplicarGravedad()
+public void DetectarPared()
 {
-	velocityX += gravity;
+	if(positionX+size > 800)
+	System.out.println("Detecte pared");
+}
+
+public void ActualizarPosicion()
+{
+	positionX = (int)velocityX;
+	positionY = (int)velocityY;
 }
 
 public void Draw (Graphics g){	

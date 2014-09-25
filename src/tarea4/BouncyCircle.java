@@ -8,28 +8,57 @@ public class BouncyCircle extends Circle{
 Color color;
 public BouncyCircle(){
 	size = 110;
-	gravity = 1f;
+	gravity = 1.3f;
 	color = Color.YELLOW;
 }
 
 @Override
 
-public void DetectarSuelo()
+public void DetectarPared()
 {
-	if(positionX+size > 800)
+	if(positionX+size >= 800)
 {
-	Saltar();
+	Detener();
 	CambiarColor();
+	WallJump();
 }
 }
 
-public void Saltar(){
-	velocityX = 5f;
+public void DetectarS(){
+
+	if(positionX+size <= 0)
+	{
+		Detener();
+		ColorCambiar();
+		Saltar();
+	}
+	}		
+
+public void WallJump(){
+	gravity = 2f;
+	velocityX = gravity;
+	velocityX = 2f;
 }
 
 public void CambiarColor()
 {
 	color = Color.PINK;
+}
+
+public void ColorCambiar()
+{
+	color = Color.GREEN;
+}
+
+public void Detener(){
+	velocityX = 0f;
+}
+
+public void Saltar(){
+	gravity = -2f;
+	velocityX -= gravity;
+	velocityX = -2f;
+	
 }
 @Override
 public void Draw (Graphics g){	
